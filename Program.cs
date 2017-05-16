@@ -1,12 +1,6 @@
-﻿using RestoreFromLocal.Models;
-using System;
-using Newtonsoft.Json;
-using System.Linq;
+﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
-using System.Text;
+
 
 namespace RestoreFromLocal
 {
@@ -14,9 +8,7 @@ namespace RestoreFromLocal
     {
         static void Main(string[] args)
         {
-
             string directoryPath;
-
             if (args.Length == 0)
             {
                 Console.WriteLine("Usage: ./program.exe directory_path");
@@ -29,12 +21,12 @@ namespace RestoreFromLocal
                     return;
                 }
             }
-
-            Data database = new Data();
-            database.truncateAllTables();
-            database.insertUsers(directoryPath);
-            database.insertChannels(directoryPath);
-            database.insertMessages(directoryPath);
+            Database.TruncateTable("Messages");
+            Database.TruncateTable("Channels");
+            Database.TruncateTable("Users");
+            Database.InsertUsers(directoryPath);
+            Database.InsertChannels(directoryPath);
+            Database.InsertMessages(directoryPath);
         }
     }
 }
