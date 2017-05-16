@@ -4,12 +4,13 @@ using System.IO;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System;
+using SlackHistoryViewer.Slack.Models;
 
 namespace RestoreFromLocal
 {
     class Database
     {
-        private Database() {}
+        private Database() { }
 
         public static void TruncateTable(string tableName)
         {
@@ -24,9 +25,10 @@ namespace RestoreFromLocal
 
         public static void InsertUsers(string path)
         {
-            string usersFile = path + "\\users.json";
+            string usersFile = String.Format("{0}\\{1}", path, ConfigurationSettings.Instance.UsersFile);
             string text = File.ReadAllText(usersFile);
             var data = JsonConvert.DeserializeObject<List<Member>>(text);
+
             using (var dbContext = new SlackHistoryViewerDbContext())
             {
                 dbContext.Users.AddRange(data.Select(u => new Users(u.Id, u.Name)));
@@ -36,9 +38,10 @@ namespace RestoreFromLocal
 
         public static void InsertChannels(string path)
         {
-            string channelsFile = path + "\\channels.json";
+            string channelsFile = String.Format("{0}\\{1}", path, ConfigurationSettings.Instance.ChannelsFile);
             string text = File.ReadAllText(channelsFile);
             var data = JsonConvert.DeserializeObject<List<Channel>>(text);
+
             using (var dbContext = new SlackHistoryViewerDbContext())
             {
                 dbContext.Channels.AddRange(data.Select(c => new Channels(c.Id, c.Name)));
@@ -51,22 +54,25 @@ namespace RestoreFromLocal
             using (var dbContext = new SlackHistoryViewerDbContext())
             {
                 Messages newMessage = new Messages();
-                string key = message.User + message.Ts;
+                string key = message.User + message.TimeStamp;
                 string hash = MD5Hasher.GetMd5Hash(key);
                 newMessage.MessageId = hash;
+
                 var idUser = dbContext.Users.Where(u => u.UserId == message.User).Select(
                     u => u.Id).FirstOrDefault();
                 if (idUser == null)
                 {
-                    int botId = dbContext.Users.Where(u => u.UserId == "USLACKBOT").Select(
-                        u => u.Id).FirstOrDefault();
+                    int botId = dbContext.Users.Where(u => u.UserId == ConfigurationSettings.Instance.SlackBotId)
+                        .Select(u => u.Id).FirstOrDefault();
                     idUser = botId;
                 }
                 newMessage.UserId = idUser;
+
                 var idChannel = dbContext.Channels.Where(c => c.ChannelId == channelId).Select(
                     c => c.Id).FirstOrDefault();
                 newMessage.ChannelId = idChannel;
                 newMessage.JsonData = JsonConvert.SerializeObject(message);
+
                 dbContext.Messages.Add(newMessage);
                 dbContext.SaveChanges();
             }
@@ -79,15 +85,18 @@ namespace RestoreFromLocal
                 string[] files = Directory.GetFiles(@path, "*.*", SearchOption.AllDirectories);
                 foreach (string f in files)
                 {
-                    if (f.EndsWith("users.json") || f.EndsWith("channels.json"))
+                    if (f.EndsWith(ConfigurationSettings.Instance.UsersFile)
+                        || f.EndsWith(ConfigurationSettings.Instance.ChannelsFile))
                     {
                         continue;
                     }
+
                     string[] words = f.Split('\\');
                     string channel = words[words.Length - 2];
                     var channelId = dbContext.Channels.Where(c => c.Name == channel).Select(
                         c => c.ChannelId).FirstOrDefault();
                     string text = File.ReadAllText(f);
+
                     var data = JsonConvert.DeserializeObject<List<Message>>(text);
                     foreach (Message message in data)
                     {
