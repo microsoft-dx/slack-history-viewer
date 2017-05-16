@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "RestoreFromLocal": {
+      "commandName": "Project"
+    }
+  }
+}
