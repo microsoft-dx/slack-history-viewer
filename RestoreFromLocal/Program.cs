@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-
+using Microsoft.Extensions.Configuration;
 
 namespace RestoreFromLocal
 {
@@ -13,7 +13,9 @@ namespace RestoreFromLocal
             {
                 Console.WriteLine("Usage: ./program.exe directory_path");
                 return;
-            } else {
+            }
+            else
+            {
                 directoryPath = args[0];
                 if (!Directory.Exists(directoryPath))
                 {
@@ -21,6 +23,16 @@ namespace RestoreFromLocal
                     return;
                 }
             }
+
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddEnvironmentVariables();
+
+            IConfigurationRoot configuration = builder.Build();
+
+            configuration.Bind(ConfigurationSettings.Instance);
+
             Database.TruncateTable("Messages");
             Database.TruncateTable("Channels");
             Database.TruncateTable("Users");
