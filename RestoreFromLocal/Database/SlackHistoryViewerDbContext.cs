@@ -12,8 +12,7 @@ namespace RestoreFromLocal
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlServer(@"Data Source=shv.database.windows.net;Initial Catalog=SlackHistoryViewer;Integrated Security=SSPI; User ID = msp; Password = 1234QWERasdf;Trusted_Connection=False;Encrypt=True");
+            optionsBuilder.UseSqlServer(ConfigurationSettings.Instance.ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
