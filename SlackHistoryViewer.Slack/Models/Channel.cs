@@ -1,7 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace SlackHistoryViewer.Slack.Models
 {
@@ -35,7 +33,7 @@ namespace SlackHistoryViewer.Slack.Models
         public bool? IsMember { get; set; }
 
         [JsonProperty("members")]
-        public IEnumerable<object> Members { get; set; }
+        public IEnumerable<string> Members { get; set; }
 
         [JsonProperty("topic")]
         public Topic Topic { get; set; }

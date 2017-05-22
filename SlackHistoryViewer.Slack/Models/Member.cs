@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SlackHistoryViewer.Slack.Models
 {
@@ -23,7 +20,7 @@ namespace SlackHistoryViewer.Slack.Models
         public Profile Profile { get; set; }
 
         [JsonProperty("isBot")]
-        public bool? Is_bot { get; set; }
+        public bool? IsBot { get; set; }
 
         [JsonProperty("updated")]
         public int? Updated { get; set; }
@@ -35,13 +32,13 @@ namespace SlackHistoryViewer.Slack.Models
         public string RealName { get; set; }
 
         [JsonProperty("tz")]
-        public string Tz { get; set; }
+        public string TimeZone { get; set; }
 
         [JsonProperty("tz_label")]
-        public string TzLabel { get; set; }
+        public string TimeZoneLabel { get; set; }
 
         [JsonProperty("tz_offset")]
-        public int? TzOffset { get; set; }
+        public int? TimeZoneOffset { get; set; }
 
         [JsonProperty("is_admin")]
         public bool? IsAdmin { get; set; }
@@ -59,7 +56,7 @@ namespace SlackHistoryViewer.Slack.Models
         public bool? IsUltraRestricted { get; set; }
 
         [JsonProperty("has_2fa")]
-        public bool? Has2Fa { get; set; }
+        public bool? HasTwoFactorAuthentication { get; set; }
 
         [JsonProperty("two_factor_type")]
         public string TwoFactorType { get; set; }

@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SlackHistoryViewer.Slack.Models
 {
     public class Attachment
     {
+        [JsonProperty("id")]
+        public int? Id { get; set; }
+
         [JsonProperty("title")]
         public string Title { get; set; }
 
@@ -39,8 +39,5 @@ namespace SlackHistoryViewer.Slack.Models
 
         [JsonProperty("service_name")]
         public string ServiceName { get; set; }
-
-        [JsonProperty("id")]
-        public int? Id { get; set; }
     }
 }
