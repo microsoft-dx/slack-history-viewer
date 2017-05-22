@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace RestoreFromLocal
+namespace SlackHistoryViewer.Database.Models
 {
-    public partial class Channels
+    public partial class Users
     {
-        public Channels(string id, string name)
+        public Users(string id, string name)
         {
             Messages = new HashSet<Messages>();
-            this.ChannelId = id;
+
+            this.UserId = id;
             this.Name = name;
         }
 
         public int Id { get; set; }
-        public string ChannelId { get; set; }
+
+        public string UserId { get; set; }
+
         public string Name { get; set; }
 
         public virtual ICollection<Messages> Messages { get; set; }

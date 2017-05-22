@@ -6,19 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Better.Extensions.Configuration.EnvironmentVariables" Version="1.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SlackHistoryViewer.Configuration\SlackHistoryViewer.Configuration.csproj" />
+    <ProjectReference Include="..\SlackHistoryViewer.Database\SlackHistoryViewer.Database.csproj" />
+    <ProjectReference Include="..\SlackHistoryViewer.Helpers\SlackHistoryViewer.Helpers.csproj" />
     <ProjectReference Include="..\SlackHistoryViewer.Slack\SlackHistoryViewer.Slack.csproj" />
   </ItemGroup>
 
