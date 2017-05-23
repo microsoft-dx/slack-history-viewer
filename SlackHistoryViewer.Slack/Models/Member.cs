@@ -19,7 +19,7 @@ namespace SlackHistoryViewer.Slack.Models
         [JsonProperty("profile")]
         public Profile Profile { get; set; }
 
-        [JsonProperty("isBot")]
+        [JsonProperty("is_bot")]
         public bool? IsBot { get; set; }
 
         [JsonProperty("updated")]

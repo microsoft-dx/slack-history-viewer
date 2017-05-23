@@ -20,7 +20,7 @@ namespace SlackHistoryViewer.Slack.Models
         [JsonProperty("reactions")]
         public IEnumerable<Reaction> Reactions { get; set; }
 
-        [JsonProperty("attachaments")]
+        [JsonProperty("attachments")]
         public IEnumerable<Attachment> Attachments { get; set; }
 
         [JsonProperty("edited")]
