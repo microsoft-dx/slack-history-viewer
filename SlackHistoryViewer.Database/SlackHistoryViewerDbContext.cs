@@ -1,28 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using SlackHistoryViewer.Configuration;
 using SlackHistoryViewer.Database.Models;
 
 namespace SlackHistoryViewer.Database
 {
     public partial class SlackHistoryViewerDbContext : DbContext
     {
-        //TODO Until System.Configuration is available
-        private readonly string _connectionString = null;
-
         public virtual DbSet<Channels> Channels { get; set; }
 
         public virtual DbSet<Messages> Messages { get; set; }
 
         public virtual DbSet<Users> Users { get; set; }
 
-        public SlackHistoryViewerDbContext(string connectionString)
-        {
-            this._connectionString = connectionString;
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(this._connectionString);
+            optionsBuilder.UseSqlServer(AppSettings.Instance.ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
