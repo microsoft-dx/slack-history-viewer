@@ -4,11 +4,11 @@ namespace SlackHistoryViewer.Database.Models
 {
     public partial class Channels
     {
-        public Channels(string id, string name)
+        public Channels(string channelId, string name)
         {
             Messages = new HashSet<Messages>();
 
-            this.ChannelId = id;
+            this.ChannelId = channelId;
             this.Name = name;
         }
 
