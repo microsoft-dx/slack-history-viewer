@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlackHistoryViewer.RestoreFromLocal", "SlackHistoryViewer.RestoreFromLocal\SlackHistoryViewer.RestoreFromLocal.csproj", "{7788D4EC-812E-4C5C-A514-4232C1D0E949}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlackHistoryViewer.Slack", "SlackHistoryViewer.Slack\SlackHistoryViewer.Slack.csproj", "{D4849B0E-68AA-43F2-A60E-77E15CBFAE5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackHistoryViewer.Database", "SlackHistoryViewer.Database\SlackHistoryViewer.Database.csproj", "{1CAD6F1F-BFF1-41EB-94CF-F35D3091F38C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackHistoryViewer.Configuration", "SlackHistoryViewer.Configuration\SlackHistoryViewer.Configuration.csproj", "{E0F6DDE9-FEE2-4382-B2ED-DBC512F45B0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackHistoryViewer.Helpers", "SlackHistoryViewer.Helpers\SlackHistoryViewer.Helpers.csproj", "{99A0CA47-9C7B-47CC-ACD2-FCD6952F76AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7788D4EC-812E-4C5C-A514-4232C1D0E949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7788D4EC-812E-4C5C-A514-4232C1D0E949}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7788D4EC-812E-4C5C-A514-4232C1D0E949}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7788D4EC-812E-4C5C-A514-4232C1D0E949}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4849B0E-68AA-43F2-A60E-77E15CBFAE5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4849B0E-68AA-43F2-A60E-77E15CBFAE5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4849B0E-68AA-43F2-A60E-77E15CBFAE5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4849B0E-68AA-43F2-A60E-77E15CBFAE5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CAD6F1F-BFF1-41EB-94CF-F35D3091F38C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CAD6F1F-BFF1-41EB-94CF-F35D3091F38C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CAD6F1F-BFF1-41EB-94CF-F35D3091F38C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CAD6F1F-BFF1-41EB-94CF-F35D3091F38C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F6DDE9-FEE2-4382-B2ED-DBC512F45B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F6DDE9-FEE2-4382-B2ED-DBC512F45B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F6DDE9-FEE2-4382-B2ED-DBC512F45B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F6DDE9-FEE2-4382-B2ED-DBC512F45B0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99A0CA47-9C7B-47CC-ACD2-FCD6952F76AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99A0CA47-9C7B-47CC-ACD2-FCD6952F76AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99A0CA47-9C7B-47CC-ACD2-FCD6952F76AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99A0CA47-9C7B-47CC-ACD2-FCD6952F76AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
