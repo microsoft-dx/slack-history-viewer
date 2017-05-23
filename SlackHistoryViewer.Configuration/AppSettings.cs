@@ -1,4 +1,4 @@
-﻿namespace SlackHistoryViewer.RestoreFromLocal.Configuration
+﻿namespace SlackHistoryViewer.Configuration
 
 {
     public class AppSettings
@@ -7,7 +7,15 @@
 
         public string ChannelsFile { get; set; }
 
+        public string IntegrationLogsFile { get; set; }
+
         public string SlackBotId { get; set; }
+
+        public string SlackBotName { get; set; }
+
+        public string UnknownBotId { get; set; }
+
+        public string UnknownBotName { get; set; }
 
         public string ConnectionString { get; set; }
 
