@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using Microsoft.Extensions.Configuration;
-using SlackHistoryViewer.RestoreFromLocal.Configuration;
+using SlackHistoryViewer.Configuration;
 
 namespace SlackHistoryViewer.RestoreFromLocal
 {
@@ -34,10 +34,8 @@ namespace SlackHistoryViewer.RestoreFromLocal
 
             configuration.Bind(AppSettings.Instance);
 
-            Database.TruncateTable("Messages");
-            Database.TruncateTable("Channels");
-            Database.TruncateTable("Users");
-
+            Database.TruncateTables("Messages", "Channels", "Users");
+            
             Database.InsertUsers(directoryPath);
             Database.InsertChannels(directoryPath);
             Database.InsertMessages(directoryPath);
