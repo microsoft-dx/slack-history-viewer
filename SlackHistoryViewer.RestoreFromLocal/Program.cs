@@ -33,12 +33,12 @@ namespace SlackHistoryViewer.RestoreFromLocal
             var configuration = builder.Build();
 
             configuration.Bind(AppSettings.Instance);
-
-            Database.TruncateTables("Messages", "Channels", "Users");
             
-            Database.InsertUsers(directoryPath);
-            Database.InsertChannels(directoryPath);
-            Database.InsertMessages(directoryPath);
+            Helpers.Database.TruncateTables("Messages", "Channels", "Users");
+            
+            Helpers.Database.InsertUsers(directoryPath);
+            Helpers.Database.InsertChannels(directoryPath);
+            Helpers.Database.InsertMessages(directoryPath);
         }
     }
 }
