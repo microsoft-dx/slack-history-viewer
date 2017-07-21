@@ -19,6 +19,14 @@
 
         public string ConnectionString { get; set; }
 
+        public string UsersListUrl { get; set; }
+
+        public string ChannelsListUrl { get; set; }
+
+        public string ChannelsHistoryUrl { get; set; }
+
+        public string SlackToken { get; set; }
+
         #region Singleton
 
         private static AppSettings _instance;
