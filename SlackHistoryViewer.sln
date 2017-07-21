@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlackHistoryViewer.RestoreFromLocal", "SlackHistoryViewer.RestoreFromLocal\SlackHistoryViewer.RestoreFromLocal.csproj", "{7788D4EC-812E-4C5C-A514-4232C1D0E949}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackHistoryViewer.Configuration", "SlackHistoryViewer.Configuration\SlackHistoryViewer.Configuration.csproj", "{E0F6DDE9-FEE2-4382-B2ED-DBC512F45B0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackHistoryViewer.Helpers", "SlackHistoryViewer.Helpers\SlackHistoryViewer.Helpers.csproj", "{99A0CA47-9C7B-47CC-ACD2-FCD6952F76AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackHistoryViewer.RemoteMessages", "SlackHistoryViewer.RemoteMessages\SlackHistoryViewer.RemoteMessages.csproj", "{7FA003D3-30F0-40BD-91E8-580EDF733832}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{99A0CA47-9C7B-47CC-ACD2-FCD6952F76AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99A0CA47-9C7B-47CC-ACD2-FCD6952F76AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99A0CA47-9C7B-47CC-ACD2-FCD6952F76AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FA003D3-30F0-40BD-91E8-580EDF733832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FA003D3-30F0-40BD-91E8-580EDF733832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FA003D3-30F0-40BD-91E8-580EDF733832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FA003D3-30F0-40BD-91E8-580EDF733832}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
