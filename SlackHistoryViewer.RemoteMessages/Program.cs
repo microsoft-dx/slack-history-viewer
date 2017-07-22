@@ -24,12 +24,12 @@ namespace SlackHistoryViewer.RemoteMessages
 
             configuration.Bind(AppSettings.Instance);
 
-            Task.Run(() => new MyClass().Run())
+            Task.Run(() => new RemoteMessages().Run())
                 .Wait();
             
         }
 
-        class MyClass
+        class RemoteMessages
         {
 
             public async Task Run()
