@@ -4,9 +4,4 @@
     <TargetFramework>netstandard1.4</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SlackHistoryViewer.Database\SlackHistoryViewer.Database.csproj" />
-    <ProjectReference Include="..\SlackHistoryViewer.Slack\SlackHistoryViewer.Slack.csproj" />
-  </ItemGroup>
-
 </Project>
