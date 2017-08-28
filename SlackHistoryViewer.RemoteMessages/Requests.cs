@@ -1,24 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Net.Http;
+using System.Threading.Tasks;
 using SlackHistoryViewer.Configuration;
 
 namespace RemoteMessages
 {
-    public class Requests
+    internal class Requests
     {
+        private Requests()
+        {
+
+        }
 
         public static async Task<string> RequestChannelsList()
         {
             using (var client = new HttpClient())
             {
-                var parameters = new Dictionary<string, string> {
-                  { "token", AppSettings.Instance.SlackToken } };
-                var encodedParameters = new FormUrlEncodedContent(parameters);
+                var parameters = new Dictionary<string, string>
+                {
+                    { "token", AppSettings.Instance.SlackToken }
+                };
+
                 var response = await client.PostAsync(
-                    AppSettings.Instance.ChannelsListUrl, 
-                    encodedParameters);
+                    AppSettings.Instance.ChannelsListUrl,
+                    new FormUrlEncodedContent(parameters));
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception("Error in getting channel lists !");
+                }
 
                 return await response.Content.ReadAsStringAsync();
             }
@@ -28,12 +39,19 @@ namespace RemoteMessages
         {
             using (var client = new HttpClient())
             {
-                var parameters = new Dictionary<string, string> {
-                  { "token", AppSettings.Instance.SlackToken } };
-                var encodedParameters = new FormUrlEncodedContent(parameters);
+                var parameters = new Dictionary<string, string>
+                {
+                    { "token", AppSettings.Instance.SlackToken }
+                };
+
                 var response = await client.PostAsync(
-                    AppSettings.Instance.UsersListUrl, 
-                    encodedParameters);
+                    AppSettings.Instance.UsersListUrl,
+                    new FormUrlEncodedContent(parameters));
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception("Error in getting users history !");
+                }
 
                 return await response.Content.ReadAsStringAsync();
             }
@@ -44,21 +62,23 @@ namespace RemoteMessages
         {
             using (var client = new HttpClient())
             {
-                var parameters = new Dictionary<string, string> {
-                  { "token", AppSettings.Instance.SlackToken },
-                { "channel", channelId} };
+                var parameters = new Dictionary<string, string>
+                {
+                    { "token", AppSettings.Instance.SlackToken },
+                    { "channel", channelId }
+                };
 
-                var encodedParameters = new FormUrlEncodedContent(parameters);
                 var response = await client.PostAsync(
-                    AppSettings.Instance.ChannelsHistoryUrl, 
-                    encodedParameters);
+                    AppSettings.Instance.ChannelsHistoryUrl,
+                    new FormUrlEncodedContent(parameters));
 
-                if (response.IsSuccessStatusCode == false)
-                    throw new Exception();
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception("Error in getting channels history !");
+                }
 
                 return await response.Content.ReadAsStringAsync();
             }
         }
-
     }
 }

@@ -1,12 +1,7 @@
-﻿using System;
+﻿using System.IO;
 using System.Threading.Tasks;
-using SlackHistoryViewer.Database;
-using Newtonsoft.Json;
-using SlackHistoryViewer.Slack.Models;
-using RemoteMessages;
-using SlackHistoryViewer.Configuration;
 using Microsoft.Extensions.Configuration;
-using System.IO;
+using SlackHistoryViewer.Configuration;
 
 namespace SlackHistoryViewer.RemoteMessages
 {
@@ -14,7 +9,6 @@ namespace SlackHistoryViewer.RemoteMessages
     {
         static void Main(string[] args)
         {
-
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appSettings.json", optional: false, reloadOnChange: true)
@@ -26,7 +20,6 @@ namespace SlackHistoryViewer.RemoteMessages
 
             Task.Run(() => new RemoteMessages().Run())
                 .Wait();
-
         }
     }
 }
