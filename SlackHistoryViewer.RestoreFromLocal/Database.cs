@@ -3,17 +3,16 @@ using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using SlackHistoryViewer.Configuration;
 using SlackHistoryViewer.Database;
 using SlackHistoryViewer.Database.Models;
-using SlackHistoryViewer.Configuration;
-using SlackHistoryViewer.Slack.Models;
 using SlackHistoryViewer.Helpers;
+using SlackHistoryViewer.Slack.Models;
 
 namespace SlackHistoryViewer.RestoreFromLocal
 {
-    class Database
+    internal class Database
     {
-
         private Database()
         {
         }
@@ -151,6 +150,5 @@ namespace SlackHistoryViewer.RestoreFromLocal
 
             return JsonConvert.DeserializeObject<List<T>>(text);
         }
-
     }
 }

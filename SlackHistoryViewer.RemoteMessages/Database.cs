@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using SlackHistoryViewer.Configuration;
 using SlackHistoryViewer.Database;
 using SlackHistoryViewer.Database.Models;
-using SlackHistoryViewer.Configuration;
-using SlackHistoryViewer.Slack.Models;
 using SlackHistoryViewer.Helpers;
-using System;
+using SlackHistoryViewer.Slack.Models;
 
 namespace SlackHistoryViewer.RemoteMessages
 {
-    public class Database
+    internal class Database
     {
-
         private Database()
         {
         }
@@ -22,10 +20,11 @@ namespace SlackHistoryViewer.RemoteMessages
             using (var dbContext = new SlackHistoryViewerDbContext())
             {
                 var newUsers = users
-                    .Where(u => !CheckDuplicateUser(u.Id))
-                    .Select(u1 => new Users(u1.Id, u1.Name));
+                    .Where(u => !CheckDuplicateUser(dbContext, u.Id))
+                    .Select(u => new Users(u.Id, u.Name));
 
                 dbContext.Users.AddRange(newUsers);
+
                 dbContext.SaveChanges();
             }
         }
@@ -35,28 +34,27 @@ namespace SlackHistoryViewer.RemoteMessages
             using (var dbContext = new SlackHistoryViewerDbContext())
             {
                 var newChannels = channels
-                    .Where(c => !CheckDuplicateUser(c.Id))
+                    .Where(c => !CheckDuplicateUser(dbContext, c.Id))
                     .Select(c => new Channels(c.Id, c.Name));
 
                 dbContext.Channels.AddRange(newChannels);
+
                 dbContext.SaveChanges();
             }
         }
 
         public static void InsertMessagesWithoutDuplicates(IEnumerable<Message> messages, string channelId)
         {
-
             using (var dbContext = new SlackHistoryViewerDbContext())
             {
-
                 foreach (Message message in messages)
                 {
                     var key = message.User + message.TimeStamp;
-                    var hash = Helpers.MD5Hasher.GetMd5Hash(key);
+                    var hash = MD5Hasher.GetMd5Hash(key);
 
-                    if (!Database.CheckDuplicateMessage(hash))
+                    if (!CheckDuplicateMessage(dbContext, hash))
                     {
-                        Database.AddMessage(dbContext, message, channelId);
+                        AddMessage(dbContext, message, channelId);
                     }
                 }
 
@@ -64,44 +62,34 @@ namespace SlackHistoryViewer.RemoteMessages
             }
         }
 
-        public static bool CheckDuplicateUser(string id)
+        private static bool CheckDuplicateUser(SlackHistoryViewerDbContext dbContext, string id)
         {
-            using (var dbContext = new SlackHistoryViewerDbContext())
-            {
-                var result = dbContext.Users
-                    .Where(u => u.UserId == id)
-                    .FirstOrDefault();
+            var result = dbContext.Users
+                .Where(u => u.UserId == id)
+                .FirstOrDefault();
 
-                return result != null;
-            }
+            return result != null;
         }
 
-        public static bool CheckDuplicateChannel(string id)
+        private static bool CheckDuplicateChannel(SlackHistoryViewerDbContext dbContext, string id)
         {
-            using (var dbContext = new SlackHistoryViewerDbContext())
-            {
-                var result = dbContext.Channels
-                    .Where(c => c.ChannelId == id)
-                    .FirstOrDefault();
+            var result = dbContext.Channels
+                .Where(c => c.ChannelId == id)
+                .FirstOrDefault();
 
-                return result != null;
-            }
-
+            return result != null;
         }
 
-        public static bool CheckDuplicateMessage(string hash)
+        private static bool CheckDuplicateMessage(SlackHistoryViewerDbContext dbContext, string hash)
         {
-            using (var dbContext = new SlackHistoryViewerDbContext())
-            {
-                var result = dbContext.Messages
-                    .Where(m => m.MessageId == hash)
-                    .FirstOrDefault();
+            var result = dbContext.Messages
+                .Where(m => m.MessageId == hash)
+                .FirstOrDefault();
 
-                return result != null;
-            }
+            return result != null;
         }
 
-        public static void AddMessage(SlackHistoryViewerDbContext dbContext, Message message, string channelId)
+        private static void AddMessage(SlackHistoryViewerDbContext dbContext, Message message, string channelId)
         {
             var newMessage = new Messages();
             newMessage.MessageId = MD5Hasher.GetMd5Hash(message.User + message.TimeStamp);
@@ -133,6 +121,5 @@ namespace SlackHistoryViewer.RemoteMessages
 
             dbContext.Messages.Add(newMessage);
         }
-
     }
 }
