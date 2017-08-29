@@ -4,6 +4,11 @@ namespace SlackHistoryViewer.Database.Models
 {
     public partial class Users
     {
+
+        public Users()
+        {
+        }
+
         public Users(string userId, string name)
         {
             Messages = new HashSet<Messages>();

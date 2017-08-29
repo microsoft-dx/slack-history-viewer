@@ -3,10 +3,10 @@ using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using SlackHistoryViewer.Configuration;
 using SlackHistoryViewer.Database;
 using SlackHistoryViewer.Database.Models;
 using SlackHistoryViewer.Helpers;
-using SlackHistoryViewer.Configuration;
 using SlackHistoryViewer.Slack.Models;
 
 namespace SlackHistoryViewer.RestoreFromLocal
@@ -65,13 +65,15 @@ namespace SlackHistoryViewer.RestoreFromLocal
             var newMessage = new Messages();
             newMessage.MessageId = MD5Hasher.GetMd5Hash(message.User + message.TimeStamp);
 
-            var idUser = dbContext.Users.Where(u => u.UserId == message.User)
+            var idUser = dbContext.Users
+                .Where(u => u.UserId == message.User)
                 .Select(u => u.Id)
                 .FirstOrDefault();
 
             if (idUser == 0)
             {
-                var botId = dbContext.Users.Where(u => u.UserId == AppSettings.Instance.UnknownBotId)
+                var botId = dbContext.Users
+                    .Where(u => u.UserId == AppSettings.Instance.UnknownBotId)
                     .Select(u => u.Id)
                     .FirstOrDefault();
 
@@ -80,7 +82,8 @@ namespace SlackHistoryViewer.RestoreFromLocal
 
             newMessage.UserId = idUser;
 
-            var idChannel = dbContext.Channels.Where(c => c.ChannelId == channelId)
+            var idChannel = dbContext.Channels
+                .Where(c => c.ChannelId == channelId)
                 .Select(c => c.Id)
                 .FirstOrDefault();
 
@@ -105,7 +108,8 @@ namespace SlackHistoryViewer.RestoreFromLocal
 
                     var words = file.Split('\\');
                     var channel = words[words.Length - 2];
-                    var channelId = dbContext.Channels.Where(c => c.Name == channel)
+                    var channelId = dbContext.Channels
+                        .Where(c => c.Name == channel)
                         .Select(c => c.ChannelId)
                         .FirstOrDefault();
 
